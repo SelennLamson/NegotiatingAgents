@@ -1,0 +1,10 @@
+Diesel;A diesel motor
+Electric;An electric motor
+Hybrid;A hybrid motor
+Hydrogen;A futuristic hydrogen motor
+Antimatter;An even more futuristic antimatter motor
+QuantumField;Something crazy that doesn't use energy at all
+BlackHole;Are you sure about that?
+BiomassBurner;Let's burn some bananas
+RocketFuel;To go fast
+FusionReactor;We just mastered a new tech

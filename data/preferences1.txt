@@ -1,0 +1,15 @@
+# Item criterion values don't have to be in the same order, but all items should have a grade in all defined criteria.
+# Empty lines, spaces and tabs don't matter, and lines beginning with # are ignored
+# This one kinda makes sense
+
+                Power >             Cost >              Consumption >               Durability >            Environment >               Noise
+Diesel :        Power = BAD,        Cost = VERY_GOOD,   Consumption = GOOD,         Durability = BAD,       Environment = BAD,          Noise = GOOD
+Electric :      Power = VERY_BAD,   Cost = GOOD,        Consumption = VERY_GOOD,    Durability = VERY_BAD,  Environment = GOOD,         Noise = VERY_GOOD
+Hybrid :        Power = BAD,        Cost = GOOD,        Consumption = GOOD,         Durability = BAD,       Environment = GOOD,         Noise = GOOD
+Hydrogen :      Power = BAD,        Cost = BAD,         Consumption = VERY_GOOD,    Durability = GOOD,      Environment = VERY_GOOD,    Noise = GOOD
+Antimatter:     Power = VERY_GOOD,  Cost = VERY_BAD,    Consumption = VERY_BAD,     Durability = GOOD,      Environment = VERY_GOOD,    Noise = VERY_BAD
+QuantumField:   Power = GOOD,       Cost = VERY_BAD,    Consumption = VERY_GOOD,    Durability = VERY_GOOD, Environment = VERY_GOOD,    Noise = GOOD
+BlackHole:      Power = VERY_GOOD,  Cost = VERY_BAD,    Consumption = VERY_BAD,     Durability = VERY_BAD,  Environment = VERY_BAD,     Noise = VERY_BAD
+BiomassBurner:  Power = VERY_BAD,   Cost = VERY_GOOD,   Consumption = VERY_GOOD,    Durability = GOOD,      Environment = VERY_GOOD,    Noise = BAD
+RocketFuel:     Power = VERY_GOOD,  Cost = BAD,         Consumption = VERY_BAD,     Durability = BAD,       Environment = BAD,          Noise = VERY_BAD
+FusionReactor:  Power = VERY_GOOD,  Cost = VERY_BAD,    Consumption = VERY_GOOD,    Durability = GOOD,      Environment = GOOD,         Noise = BAD

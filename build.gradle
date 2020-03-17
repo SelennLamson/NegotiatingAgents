@@ -1,0 +1,101 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id  'com.github.spotbugs' version '1.6.10'
+}
+
+version = '0.1'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile name: "jade-4.5.0"
+    compile group:"junit", name:"junit", version:"4.12"
+}
+
+compileJava {
+    options.compilerArgs += '-Xlint:unchecked'
+}
+
+jar {
+    archiveFileName = 'pw3-engine-' + project.version + '.jar'
+    destinationDirectory = file("$rootDir")
+    manifest {
+        attributes 'Implementation-Title': 'PW3 Engine build',
+                'Implementation-Version': project.version,
+                'Gradle-Version':'Gradle 5.5.1',
+                'Built-By': 'Emmanuel Hermellin',
+                'Main-Class': 'centralesupelec.engine.Launcher'
+    }
+    doFirst {
+        from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+}
+
+task run (type: JavaExec, dependsOn: build){
+    if (project.hasProperty("Args")) {
+        println("arguments list : " + Args)
+        args(Args.split(','))
+    }
+    jvmArgs = ["-cp", "libs/jade-4.5.0.jar", "-cp", 'pw3-engine-' + version + '.jar', "jade.Boot", "-gui"]
+    description = 'Run PW3 Engine'
+    main = 'centralesupelec.engine.Launcher'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task launch (type: JavaExec, dependsOn: build){
+    if (project.hasProperty("Args")) {
+        println("arguments list : " + Args)
+        args(Args.split(','))
+    }
+    jvmArgs = ["-cp", "libs/jade-4.5.0.jar"]
+    description = 'Run PW3 Engine'
+    main = 'centralesupelec.engine.Launcher'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+clean{
+    delete 'build', 'out', 'pw3-engine-' + version + '.jar'
+}
+
+checkstyle {
+    toolVersion = '8.23'
+    configFile = rootProject.file("config/checkstyle/checkstyle.xml")
+    showViolations = true
+    ignoreFailures = true
+}
+
+tasks.withType(Checkstyle) {
+  reports {
+	xml.enabled = false
+    html.enabled = true
+  }
+}
+
+spotbugs {
+    ignoreFailures = true
+    effort= 'max'
+    reportLevel = 'low'
+    excludeFilter = file("$rootProject.projectDir/config/spotbugs/excludeFilter.xml")
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+test {
+    minHeapSize = "512m"
+    maxHeapSize = "1024m"
+    forkEvery = 1
+}
